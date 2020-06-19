@@ -11,7 +11,7 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/rest"
 )
 
 // data pvc name
@@ -24,7 +24,7 @@ var configPVC = os.Getenv("CONFIG_PVC")
 var transcodePVC = os.Getenv("TRANSCODE_PVC")
 
 // pms namespace
-var namespace = os.Getenv("KUBE_NAMESPACE")
+var namespace = "plex-transcode" //os.Getenv("KUBE_NAMESPACE")
 
 // image for the plexmediaserver container containing the transcoder. This
 // should be set to the same as the 'master' pms server
@@ -43,7 +43,7 @@ func main() {
 	}
 	pod := generatePod(cwd, env, args)
 
-	cfg, err := clientcmd.BuildConfigFromFlags("", "")
+	cfg, err := rest.InClusterConfig()
 	if err != nil {
 		log.Fatalf("Error building kubeconfig: %s", err)
 	}
