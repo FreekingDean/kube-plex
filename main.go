@@ -24,7 +24,7 @@ var configPVC = os.Getenv("CONFIG_PVC")
 var transcodePVC = os.Getenv("TRANSCODE_PVC")
 
 // pms namespace
-var namespace = "plex-transcode" //os.Getenv("KUBE_NAMESPACE")
+var namespace = os.Getenv("KUBE_NAMESPACE")
 
 // image for the plexmediaserver container containing the transcoder. This
 // should be set to the same as the 'master' pms server
