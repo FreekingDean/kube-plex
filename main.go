@@ -77,7 +77,7 @@ func main() {
 	}
 
 	log.Printf("Cleaning up pod...")
-	err = kubeClient.CoreV1().Pods(namespace).Delete(pod.Name, nil)
+	//	err = kubeClient.CoreV1().Pods(namespace).Delete(pod.Name, nil)
 	if err != nil {
 		log.Fatalf("Error cleaning up pod: %s", err)
 	}
